@@ -66,6 +66,27 @@ const theme = extendTheme({
     wider: "0.05em",
     widest: "0.1em",
   },
+  components: {
+    Text: {
+      baseStyle: {
+        fontFamily: "'Odibee Sans', cursive",
+        fontWeight: "bold",
+      },
+    },
+  },
+  styles: {
+    global: {
+      body: {
+        backgroundColor: "#ffff",
+        padding: 0,
+        margin: 0,
+      },
+      a: {
+        color: "inherit",
+        textDecoration: "none",
+      },
+    },
+  },
 });
 
 export default theme;
