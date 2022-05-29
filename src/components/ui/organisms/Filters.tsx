@@ -31,7 +31,8 @@ const Filters: React.FC = () => {
 
   return (
     <GridItem
-      bg="tomato"
+      bg="secondary"
+      color="primaryText"
       gridArea={[
         "2 / 1 / 3 / 7",
         "2 / 1 / 3 / 7",
@@ -42,7 +43,15 @@ const Filters: React.FC = () => {
     >
       <Box p={3}>
         <CustomAccordion>
-          <Text fontSize={["xl", "xl", "2xl", "2xl"]}>Filters</Text>
+          <Text
+            fontSize={["xl", "xl", "2xl", "2xl"]}
+            color="orange"
+            textShadow="0px 0px 4px  #ffa500"
+            flex="1"
+            textAlign="left"
+          >
+            Filters
+          </Text>
           <Flex flexDirection={["column", "column", "column", "column"]}>
             <Box px={5} pb={2}>
               <Text fontSize={["lg", "xl", "xl", "2xl"]}>Card Type</Text>

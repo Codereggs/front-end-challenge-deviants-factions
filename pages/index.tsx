@@ -1,8 +1,8 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import CardSectionBody from "@components/CardSectionBody";
-import Filters from "@components/Filters";
-import Footer from "@components/Footer";
-import Header from "@components/Header";
+import CardSectionBody from "@components/ui/organisms/CardSectionBody";
+import Filters from "@components/ui/organisms/Filters";
+import Footer from "@components/ui/organisms/Footer";
+import Header from "@components/ui/organisms/Header";
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
             ,
             "80px 80px repeat(3, 1fr) 80px",
             ,
-            "80px  repeat(4, 1fr) 80px",
+            "50px  repeat(4, 1fr) 80px",
           ]}
           gridAutoRows="minmax(1fr, auto)"
         >

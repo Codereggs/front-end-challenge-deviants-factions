@@ -69,8 +69,9 @@ const theme = extendTheme({
   components: {
     Text: {
       baseStyle: {
-        fontFamily: "'Odibee Sans', cursive",
+        fontFamily: "'Rajdhani', sans-serif",
         fontWeight: "bold",
+        letterSpacing: "2px",
       },
     },
   },
@@ -88,5 +89,10 @@ const theme = extendTheme({
     },
   },
 });
+
+export const styleHover = {
+  color: "#ffa500",
+  boxShadow: "0px 0px 5px 1px #ffa500",
+};
 
 export default theme;

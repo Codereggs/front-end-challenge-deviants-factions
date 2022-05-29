@@ -1,6 +1,7 @@
 import {
   Accordion,
   AccordionButton,
+  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box,
@@ -8,17 +9,22 @@ import {
   GridItem,
   Image,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import { styleHover } from "assets/theme/chakratheme";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "src/app/store";
 import { getAllCards } from "src/features/counter/cardsSlice";
+import ModalCards from "../molecules/ModalCards";
 
 const CardSectionBody: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { loading, charType, hqType, technoType, filtered, filteredData } =
     useSelector((state: RootState) => state.cards.cards);
+
+  const [openModal, setOpenModal] = useState<any>({ open: false, data: {} });
 
   const renderTypesCards = (arr: any[]) => {
     return (
@@ -35,11 +41,12 @@ const CardSectionBody: React.FC = () => {
         justifyContent="center"
         justifyItems="center"
       >
-        {arr.length > 0 &&
+        {arr.length > 0 ? (
           arr.map((card: any) => (
             <GridItem key={card.id} w="100%">
               <Box p={2}>
                 <Image
+                  loading="lazy"
                   alt={card.Name + card.id}
                   src={`https://deviants-factions.mo.cloudinary.net/cards/${
                     card.id
@@ -48,10 +55,19 @@ const CardSectionBody: React.FC = () => {
                       ? "png"
                       : "gif"
                   }?tx=h_600,q_80,f_auto`}
+                  onClick={(e) => setOpenModal({ open: true, data: e.target })}
+                  _hover={{ transform: "scale(1.1)", transition: "1s ease" }}
                 />
               </Box>
             </GridItem>
-          ))}
+          ))
+        ) : (
+          <GridItem w="100%" gridArea="1/1/1/5">
+            <Box p={2} textAlign="center" w="100%">
+              <Text color="white">Card not found</Text>
+            </Box>
+          </GridItem>
+        )}
       </Grid>
     );
   };
@@ -64,7 +80,7 @@ const CardSectionBody: React.FC = () => {
   return (
     <>
       <GridItem
-        bg="papayawhip"
+        bg="primary"
         textAlign="center"
         fontSize="2xl"
         p={10}
@@ -77,7 +93,13 @@ const CardSectionBody: React.FC = () => {
       >
         {filtered ? (
           <>
-            <Text my={3} fontSize="3xl" fontFamily="body">
+            <Text
+              my={3}
+              fontSize="3xl"
+              fontFamily="body"
+              letterSpacing="auto"
+              color="primaryText"
+            >
               Filtered Cards
             </Text>
             <Box borderRadius="20px" bg="secondary" p={3}>
@@ -85,22 +107,30 @@ const CardSectionBody: React.FC = () => {
             </Box>
           </>
         ) : (
-          <Accordion allowToggle allowMultiple /* defaultIndex={0} */>
+          <Accordion allowToggle allowMultiple defaultIndex={0}>
             {hqType.length > 0 && (
               <>
                 <AccordionItem
                   bg="secondary"
                   color="primaryText"
                   borderRadius="10px"
+                  mb={5}
                 >
-                  <AccordionButton disabled={loading}>
+                  <AccordionButton
+                    disabled={loading}
+                    _hover={styleHover}
+                    _focus={styleHover}
+                  >
                     <Text
                       my={3}
                       fontSize={["xl", "xl", "2xl", "3xl"]}
-                      fontFamily="body"
+                      flex="1"
+                      textAlign="left"
+                      letterSpacing="auto"
                     >
                       HQ Cards
                     </Text>
+                    <AccordionIcon color="white" />
                   </AccordionButton>
                   <AccordionPanel>
                     <Box borderRadius="20px" bg="secondary">
@@ -117,15 +147,23 @@ const CardSectionBody: React.FC = () => {
                   bg="secondary"
                   color="primaryText"
                   borderRadius="10px"
+                  mb={5}
                 >
-                  <AccordionButton disabled={loading}>
+                  <AccordionButton
+                    disabled={loading}
+                    _hover={styleHover}
+                    _focus={styleHover}
+                  >
                     <Text
                       my={3}
                       fontSize={["xl", "xl", "2xl", "3xl"]}
-                      fontFamily="body"
+                      flex="1"
+                      textAlign="left"
+                      letterSpacing="auto"
                     >
                       Character Cards
                     </Text>
+                    <AccordionIcon color="white" />
                   </AccordionButton>
                   <AccordionPanel>
                     <Box borderRadius="20px" bg="secondary" p={3}>
@@ -142,15 +180,23 @@ const CardSectionBody: React.FC = () => {
                   bg="secondary"
                   color="primaryText"
                   borderRadius="10px"
+                  mb={5}
                 >
-                  <AccordionButton disabled={loading}>
+                  <AccordionButton
+                    disabled={loading}
+                    _hover={styleHover}
+                    _focus={styleHover}
+                  >
                     <Text
                       my={3}
                       fontSize={["xl", "xl", "2xl", "3xl"]}
-                      fontFamily="body"
+                      flex="1"
+                      textAlign="left"
+                      letterSpacing="auto"
                     >
                       Technologies Cards
                     </Text>
+                    <AccordionIcon color="white" />
                   </AccordionButton>
                   <AccordionPanel>
                     <Box borderRadius="20px" bg="secondary" p={3}>
@@ -163,6 +209,7 @@ const CardSectionBody: React.FC = () => {
           </Accordion>
         )}
       </GridItem>
+      <ModalCards openModal={openModal} setOpenModal={setOpenModal} />
     </>
   );
 };

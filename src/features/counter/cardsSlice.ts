@@ -15,6 +15,7 @@ export interface CounterState {
     technoType: any;
     filteredData: any;
     filtered: boolean;
+    searchData: any;
   };
   error: any;
 }
@@ -27,6 +28,7 @@ const initialState: CounterState = {
     charType: {},
     technoType: {},
     filteredData: {},
+    searchData: {},
     filtered: false,
   },
   error: null,
@@ -45,7 +47,7 @@ export const cardsSlice = createSlice({
       state.cards.filtered = action.payload;
     },
     filterCards: (state, action) => {
-      state.cards.filteredData = state.cards.data.filter((card) =>
+      state.cards.filteredData = state.cards.data?.filter((card) =>
         action.payload.some(
           (type) =>
             type === card.CardType.toLowerCase() ||
@@ -53,6 +55,13 @@ export const cardsSlice = createSlice({
             type === card.Rarity.toLowerCase()
         )
       );
+    },
+    searchCards: (state, action) => {
+      if (action.payload === "") return;
+      let regExp = new RegExp(`^${action.payload}*`, "gi");
+      state.cards.filteredData = state.cards.data.filter((el) => {
+        return regExp.test(el.Name);
+      });
     },
   },
   extraReducers: (builder) => {
@@ -80,6 +89,6 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { isFiltered, filterCards } = cardsSlice.actions;
+export const { isFiltered, filterCards, searchCards } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

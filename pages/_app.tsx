@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Deviant Factions Card Game</title>
         <meta name="Deviant Factions" content="NFT Card Game" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.5a343880.gif" />
       </Head>
       <Provider store={store}>
         <ChakraProvider theme={theme}>
