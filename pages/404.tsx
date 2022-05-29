@@ -14,7 +14,7 @@ const PageError: React.FC = () => (
     bg="blackAlpha.800"
     color="whiteAlpha.900"
   >
-    <Text fontSize="3.75rem">Oops. This Page doesn't exist.</Text>
+    <Text fontSize="3.75rem">Oops. This page not exist.</Text>
     <Button
       color="primary"
       fontSize={30}
