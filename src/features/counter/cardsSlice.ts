@@ -35,8 +35,12 @@ const initialState: CounterState = {
 };
 
 export const getAllCards = createAsyncThunk("cards/getAllCards", async () => {
-  const response = await axios.get("https://pastebin.com/raw/Yt8YLDV1");
-  return response.data;
+  //Commented because CORS problem with request to pastebin
+  /*   const response = await axios.get("https://www.pastebin.com/raw/Yt8YLDV1");
+  return response.data; */
+
+  const response2 = await axios.get("/mock/info.json");
+  return response2.data;
 });
 
 export const cardsSlice = createSlice({
